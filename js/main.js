@@ -4,6 +4,8 @@ const taskInput = document.querySelector('#taskInput');
 const tasksList = document.querySelector('#tasksList');
 const emptyList = document.querySelector('#emptyList');
 
+let tasks = [];
+
 // Добавление задачи
 form.addEventListener('submit', addTask);
 tasksList.addEventListener('click', deleteTask)
@@ -16,6 +18,18 @@ function addTask(event) {
 
   // Достаём текст задачи из поля ввода
   const taskText = taskInput.value;
+
+  //Описываем задачу в виде объекта
+  const newTask = {
+    id: Date.now(),
+    text: taskText,
+    done: false,
+  }
+
+  //Добавляем задачу в массив с задачами
+  tasks.push(newTask)
+
+  
 
   // Формируем разметку для новой задачи
   const taskHTML = `
