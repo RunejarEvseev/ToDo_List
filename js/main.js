@@ -6,11 +6,7 @@ const emptyList = document.querySelector('#emptyList');
 
 // Добавление задачи
 form.addEventListener('submit', addTask);
-
-// Удаление задачи
 tasksList.addEventListener('click', deleteTask)
-
-// Отмечаем задачу завершённой
 tasksList.addEventListener('click', doneTask)
 
 // Функции
@@ -49,12 +45,12 @@ function addTask(event) {
 }
 
 function deleteTask(event) {
+  // Проверяем если клик был НЕ по кнопке "удалить задачу"
+  if (event.target.dataset.action !== 'delete') return;
   
   // Проверяем, что клик был по кнопке "удалить задачу"
-  if (event.target.dataset.action === 'delete') {
-    const parentNode = event.target.closest('.list-group-item');
-    parentNode.remove()
-  }
+  const parentNode = event.target.closest('.list-group-item');
+  parentNode.remove();
 
   // Проверка. Если в списке задач 1-ин элемент, то блок "Список дел пуст" отображается
   if(tasksList.children.length === 1) {
@@ -63,11 +59,12 @@ function deleteTask(event) {
 }
 
 function doneTask(event) {
+  // Проверяем если клик был НЕ по кнопке "Задача выполнена"
+  if (event.target.dataset.action !== "done") return;
+
   // Проверяем, что клик был по кнопке "Задача выполнена"
-  if (event.target.dataset.action === "done") {
     const parentNode = event.target.closest('.list-group-item');
     const taskTitle =  parentNode.querySelector('.task-title');
     taskTitle.classList.toggle('task-title--done');
-  }
 }
 
